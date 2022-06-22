@@ -30,6 +30,10 @@ public class EduTeacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty("讲师id")
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private String id;
+
     @ApiModelProperty("讲师姓名")
     @TableField("name")
     private String name;
