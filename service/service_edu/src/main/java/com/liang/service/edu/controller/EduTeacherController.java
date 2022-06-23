@@ -40,8 +40,14 @@ public class EduTeacherController {
         return Result.<List<EduTeacher>> success().setData(teachers);
     }
 
+    @ApiOperation("根据id查询")
+    @GetMapping("/getTeacher/{id}")
+    public Result<EduTeacher> getTeacher(@PathVariable String id){
+        return Result.<EduTeacher> success().setData(teacherService.getById(id));
+    }
+
     @ApiOperation("删除讲师")
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public Result<Boolean> removeTeacher(@ApiParam(name="id", value = "讲师id", required = true) @PathVariable String id){
         return teacherService.removeById(id) ? Result.success() : Result.error();
     }
@@ -59,7 +65,7 @@ public class EduTeacherController {
     }
 
     @ApiOperation("条件查询")
-    @PostMapping("pageTeacherCondition/{current}/{limit}")
+    @PostMapping("/pageTeacherCondition/{current}/{limit}")
     public Result<Map<String, Object>> pageTeacherCondition(@PathVariable long current,
                                        @PathVariable long limit,
                                        @RequestBody TeacherQuery teacherQuery){
@@ -81,8 +87,22 @@ public class EduTeacherController {
     }
 
     @ApiOperation("添加讲师")
-    @PostMapping("addTeacher")
-    public Result<Object> addTeacher(@RequestBody EduTeacher eduTeacher){
+    @PostMapping("/addTeacher")
+    public Result<EduTeacher> addTeacher(@RequestBody EduTeacher eduTeacher){
         return teacherService.save(eduTeacher) ? Result.success() : Result.error();
     }
+
+    @ApiOperation("修改讲师")
+    @PostMapping("/updateTeacher")
+    public Result<Object> updateTeacher(@RequestBody EduTeacher teacher){
+        return teacherService.updateById(teacher) ? Result.success() : Result.error();
+    }
+
+    @ApiOperation("根据id修改讲师")
+    @PostMapping("/{id}")
+    public Result<Object> updateTeacherById(@PathVariable String id, @RequestBody EduTeacher teacher){
+        teacher.setId(id);
+        return teacherService.updateById(teacher) ? Result.success() : Result.error();
+    }
+
 }
