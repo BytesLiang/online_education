@@ -1,12 +1,12 @@
 package com.liang.service.edu.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -61,6 +61,14 @@ public class EduTeacher implements Serializable {
     @ApiModelProperty("入驻时间")
     @TableField("join_date")
     private LocalDate joinDate;
+
+    @ApiModelProperty("创建时间")
+    @TableField(value = "gmt_create", fill = FieldFill.INSERT)
+    private LocalDateTime gmtCreate;
+
+    @ApiModelProperty("更新时间")
+    @TableField(value = "gmt_modified", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime gmtModified;
 
     @ApiModelProperty("逻辑删除 1（true）已删除， 0（false）未删除")
     @TableField("is_deleted")

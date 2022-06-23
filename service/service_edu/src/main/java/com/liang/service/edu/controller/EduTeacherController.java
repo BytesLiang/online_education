@@ -80,4 +80,9 @@ public class EduTeacherController {
         return Result.<Map<String, Object>> success().setData(map);
     }
 
+    @ApiOperation("添加讲师")
+    @PostMapping("addTeacher")
+    public Result<Object> addTeacher(@RequestBody EduTeacher eduTeacher){
+        return teacherService.save(eduTeacher) ? Result.success() : Result.error();
+    }
 }

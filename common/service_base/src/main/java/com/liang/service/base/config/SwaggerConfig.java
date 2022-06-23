@@ -1,4 +1,4 @@
-package com.liang.service.base;
+package com.liang.service.base.config;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
