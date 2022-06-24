@@ -3,6 +3,7 @@ package com.liang.service.edu.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liang.common.utils.Result;
+import com.liang.service.base.exceptionHandler.MyException;
 import com.liang.service.edu.entity.EduTeacher;
 import com.liang.service.edu.entity.vo.TeacherQuery;
 import com.liang.service.edu.service.EduTeacherService;
@@ -103,6 +104,17 @@ public class EduTeacherController {
     public Result<Object> updateTeacherById(@PathVariable String id, @RequestBody EduTeacher teacher){
         teacher.setId(id);
         return teacherService.updateById(teacher) ? Result.success() : Result.error();
+    }
+
+    @ApiOperation("异常处理测试")
+    @PostMapping("/exception")
+    public Result<Object> testException(){
+        try{
+            int i = 3/0;
+        } catch (Exception e){
+            throw new MyException(20001, "MyException");
+        }
+        return Result.success();
     }
 
 }
