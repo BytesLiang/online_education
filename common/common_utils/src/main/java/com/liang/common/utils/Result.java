@@ -26,8 +26,16 @@ public class Result<T> {
     // 构造方法私有化
     private Result(){}
 
-    public static <T> Result<T> success(){
+    public static <T> Result<T> success(T data){
         return new Result<T>()
+                .setSuccess(true)
+                .setCode(ResultCode.SUCCESS.getType())
+                .setMessage("success")
+                .setData(data);
+    }
+
+    public static Result<Object> success(){
+        return new Result<Object>()
                 .setSuccess(true)
                 .setCode(ResultCode.SUCCESS.getType())
                 .setMessage("success");

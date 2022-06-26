@@ -38,18 +38,18 @@ public class EduTeacherController {
     @GetMapping("/findAll")
     public Result<List<EduTeacher>> fidAllTeacher(){
         List<EduTeacher> teachers = teacherService.list(null);
-        return Result.<List<EduTeacher>> success().setData(teachers);
+        return Result.success(teachers);
     }
 
     @ApiOperation("根据id查询")
     @GetMapping("/getTeacher/{id}")
     public Result<EduTeacher> getTeacher(@PathVariable String id){
-        return Result.<EduTeacher> success().setData(teacherService.getById(id));
+        return Result.success(teacherService.getById(id));
     }
 
     @ApiOperation("删除讲师")
     @DeleteMapping("/{id}")
-    public Result<Boolean> removeTeacher(@ApiParam(name="id", value = "讲师id", required = true) @PathVariable String id){
+    public Result<Object> removeTeacher(@ApiParam(name="id", value = "讲师id", required = true) @PathVariable String id){
         return teacherService.removeById(id) ? Result.success() : Result.error();
     }
 
@@ -62,7 +62,7 @@ public class EduTeacherController {
         Map<String, Object> map = new HashMap<>();
         map.put("total", teacherPage.getPages());
         map.put("rows", teacherPage.getRecords());
-        return Result.<Map<String, Object>> success().setData(map);
+        return Result.success(map);
     }
 
     @ApiOperation("条件查询")
@@ -84,12 +84,12 @@ public class EduTeacherController {
         Map<String, Object> map = new HashMap<>();
         map.put("total", teacherPage.getPages());
         map.put("rows", teacherPage.getRecords());
-        return Result.<Map<String, Object>> success().setData(map);
+        return Result.success(map);
     }
 
     @ApiOperation("添加讲师")
     @PostMapping("/addTeacher")
-    public Result<EduTeacher> addTeacher(@RequestBody EduTeacher eduTeacher){
+    public Result<Object> addTeacher(@RequestBody EduTeacher eduTeacher){
         return teacherService.save(eduTeacher) ? Result.success() : Result.error();
     }
 
