@@ -11,8 +11,8 @@ spring:
 
 tencent:
   cos:
-    secretId: AKIDkR2RfmlhT6g8NhpjPn5GMQL6i8NURIB7
-    secretKey: udCdxCLIJG3iHiLvPo6EG8HXiicQ7eKu
+    secretId: *
+    secretKey: *
     region: ap-beijing
     bucketName: edu-1312533782
 
