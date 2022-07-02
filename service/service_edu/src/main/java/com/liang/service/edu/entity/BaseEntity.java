@@ -24,8 +24,4 @@ public class BaseEntity implements Serializable {
     @TableField(value = "gmt_modified", fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty("逻辑删除 1（true）已删除， 0（false）未删除")
-    @TableField("is_deleted")
-    @TableLogic
-    private Boolean deleted;
 }

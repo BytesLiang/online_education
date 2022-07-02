@@ -55,4 +55,9 @@ public class EduTeacher extends BaseEntity implements Serializable {
     @ApiModelProperty("入驻时间")
     @TableField("join_date")
     private LocalDate joinDate;
+
+    @ApiModelProperty("逻辑删除 1（true）已删除， 0（false）未删除")
+    @TableField("is_deleted")
+    @TableLogic
+    private Boolean deleted;
 }
