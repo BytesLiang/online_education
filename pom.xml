@@ -9,6 +9,7 @@
     <modules>
         <module>service</module>
         <module>common</module>
+        <module>service/service_cos</module>
     </modules>
     <name>online_education</name>
     <description>online_education</description>
@@ -20,6 +21,7 @@
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <swagger.version>3.0.0</swagger.version>
+        <qcloud.cos_api.version>5.6.89</qcloud.cos_api.version>
     </properties>
 
     <dependencyManagement>
@@ -53,6 +55,11 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>${qcloud.cos_api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
