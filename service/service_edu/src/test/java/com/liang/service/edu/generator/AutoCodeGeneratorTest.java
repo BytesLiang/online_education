@@ -19,7 +19,8 @@ public class AutoCodeGeneratorTest {
     private static final String password = "123456";  // 数据库用户密码
     private static final String url = "jdbc:mysql://42.193.122.64:3306/edu?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8";  // 数据库连接URL
 //    private static final String tableName = "edu_teacher";  // 待生成对象表名
-    private static final String tableName = "edu_subject";
+//    private static final String tableName = "edu_subject";
+    private static final String tableName = "edu_course,edu_course_description,edu_chapter";
     private static final String parent = "com.liang.service";
     public static final String moduleName = "edu";
 
