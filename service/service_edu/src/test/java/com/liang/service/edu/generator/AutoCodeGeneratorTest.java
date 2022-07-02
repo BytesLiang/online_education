@@ -1,4 +1,4 @@
-package com.liang.generator;
+package com.liang.service.edu.generator;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
+import com.liang.service.edu.entity.BaseEntity;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
@@ -17,8 +18,8 @@ public class AutoCodeGeneratorTest {
     private static final String driverClassName = "com.mysql.cj.jdbc.Driver";  // 驱动名称
     private static final String password = "123456";  // 数据库用户密码
     private static final String url = "jdbc:mysql://42.193.122.64:3306/edu?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8";  // 数据库连接URL
-    private static final String tableName = "edu_teacher";  // 待生成对象表名
-
+//    private static final String tableName = "edu_teacher";  // 待生成对象表名
+    private static final String tableName = "edu_subject";
     private static final String parent = "com.liang.service";
     public static final String moduleName = "edu";
 
@@ -49,7 +50,7 @@ public class AutoCodeGeneratorTest {
                             .pathInfo(Collections.singletonMap(OutputFile.xml, projectPath+ "/src/main/resources/")); // 设置mapperXml生成路径
                 })
                 // 策略配置
-                .strategyConfig(builder -> {
+                .strategyConfig(builder ->
                     builder.addInclude(tableName.split(",")) // 设置需要生成的表名
                             .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             .serviceBuilder() //开启service策略配置
@@ -68,8 +69,9 @@ public class AutoCodeGeneratorTest {
                             .enableRemoveIsPrefix() // 开启 Boolean 类型字段移除 is 前缀
                             .addTableFills(new Column("gmt_create", FieldFill.INSERT)) // 配置添加自动填充字段
                             .addTableFills(new Column("gmt_modified", FieldFill.INSERT_UPDATE))  // 添加和更新配置自动填充字段
-                            .addSuperEntityColumns("id", "gmt_create", "gmt_modified");
-                })
+                            .superClass(BaseEntity.class)
+                            .addSuperEntityColumns("id", "gmt_create", "gmt_modified")
+                )
                 // 模板配置
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();

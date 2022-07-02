@@ -4,13 +4,11 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -21,18 +19,14 @@ import lombok.experimental.Accessors;
  * @author liang
  * @since 2022-06-22
  */
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper=false)
 @TableName("edu_teacher")
 @ApiModel(value = "EduTeacher对象", description = "讲师")
-public class EduTeacher implements Serializable {
+public class EduTeacher extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty("讲师id")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
 
     @ApiModelProperty("讲师姓名")
     @TableField("name")
@@ -61,19 +55,4 @@ public class EduTeacher implements Serializable {
     @ApiModelProperty("入驻时间")
     @TableField("join_date")
     private LocalDate joinDate;
-
-    @ApiModelProperty("创建时间")
-    @TableField(value = "gmt_create", fill = FieldFill.INSERT)
-    private LocalDateTime gmtCreate;
-
-    @ApiModelProperty("更新时间")
-    @TableField(value = "gmt_modified", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime gmtModified;
-
-    @ApiModelProperty("逻辑删除 1（true）已删除， 0（false）未删除")
-    @TableField("is_deleted")
-    @TableLogic
-    private Boolean deleted;
-
-
 }

@@ -12,6 +12,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     public Result<Object> error(Exception e){
         log.error(e.getMessage());
+        e.printStackTrace();
         return Result.error().setMessage("GlobalException");
     }
 

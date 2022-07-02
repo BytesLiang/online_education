@@ -2,15 +2,14 @@ package com.liang.service.edu.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.liang.common.utils.Result;
 import com.liang.service.base.exceptionHandler.MyException;
+import com.liang.common.utils.Result;
 import com.liang.service.edu.entity.EduTeacher;
 import com.liang.service.edu.entity.vo.TeacherQuery;
 import com.liang.service.edu.service.EduTeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,11 +27,15 @@ import java.util.Map;
  */
 @Api(tags = "讲师信息处理")
 @RestController
-@RequestMapping("/service/teacher")
+@RequestMapping("/eduService/teacher")
+@CrossOrigin
 public class EduTeacherController {
 
-    @Autowired
-    private EduTeacherService teacherService;
+    private final EduTeacherService teacherService;
+
+    public EduTeacherController(EduTeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
 
     @ApiOperation("查询所有讲师")
     @GetMapping("/findAll")
@@ -42,7 +45,7 @@ public class EduTeacherController {
     }
 
     @ApiOperation("根据id查询")
-    @GetMapping("/getTeacher/{id}")
+    @GetMapping("/{id}")
     public Result<EduTeacher> getTeacher(@PathVariable String id){
         return Result.success(teacherService.getById(id));
     }
@@ -54,7 +57,7 @@ public class EduTeacherController {
     }
 
     @ApiOperation("分页查询")
-    @GetMapping("/pageTeacher/{current}/{limit}")
+    @GetMapping("/page/{current}/{limit}")
     public Result<Map<String, Object>> pageListTeacher(@PathVariable long current,
                                                     @PathVariable long limit){
         Page<EduTeacher> teacherPage = new Page<>(current, limit);
@@ -66,11 +69,11 @@ public class EduTeacherController {
     }
 
     @ApiOperation("条件查询")
-    @PostMapping("/pageTeacherCondition/{current}/{limit}")
+    @PostMapping("/page/{current}/{limit}")
     public Result<Map<String, Object>> pageTeacherCondition(@PathVariable long current,
                                        @PathVariable long limit,
                                        @RequestBody TeacherQuery teacherQuery){
-        Page<EduTeacher> teacherPage = new Page<>();
+        Page<EduTeacher> teacherPage = new Page<>(current, limit);
         String name = teacherQuery.getName();
         Integer level = teacherQuery.getLevel();
         String begin = teacherQuery.getBegin();
@@ -78,23 +81,24 @@ public class EduTeacherController {
         QueryWrapper<EduTeacher> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(!StringUtils.isEmpty(name), "name", name);
         queryWrapper.eq(!StringUtils.isEmpty(level), "level", level);
-        queryWrapper.ge(!StringUtils.isEmpty(begin), "gmt_create", begin);
-        queryWrapper.le(!StringUtils.isEmpty(end), "gmt_create", end);
+        queryWrapper.ge(!StringUtils.isEmpty(begin), "join_date", begin);
+        queryWrapper.le(!StringUtils.isEmpty(end), "join_date", end);
+        queryWrapper.orderByDesc("gmt_create");
         teacherService.page(teacherPage, queryWrapper);
         Map<String, Object> map = new HashMap<>();
-        map.put("total", teacherPage.getPages());
+        map.put("total", teacherPage.getTotal());
         map.put("rows", teacherPage.getRecords());
         return Result.success(map);
     }
 
     @ApiOperation("添加讲师")
-    @PostMapping("/addTeacher")
+    @PostMapping("/add")
     public Result<Object> addTeacher(@RequestBody EduTeacher eduTeacher){
         return teacherService.save(eduTeacher) ? Result.success() : Result.error();
     }
 
     @ApiOperation("修改讲师")
-    @PostMapping("/updateTeacher")
+    @PutMapping("/update")
     public Result<Object> updateTeacher(@RequestBody EduTeacher teacher){
         return teacherService.updateById(teacher) ? Result.success() : Result.error();
     }

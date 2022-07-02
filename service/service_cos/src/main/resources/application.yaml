@@ -1,0 +1,18 @@
+#服务端口
+server:
+  port: 8002
+spring:
+  #服务名
+  application:
+    name: server_cos
+  #环境设置
+  profiles:
+    active: dev
+
+tencent:
+  cos:
+    secretId: AKIDkR2RfmlhT6g8NhpjPn5GMQL6i8NURIB7
+    secretKey: udCdxCLIJG3iHiLvPo6EG8HXiicQ7eKu
+    region: ap-beijing
+    bucketName: edu-1312533782
+
