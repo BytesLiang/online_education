@@ -2,6 +2,9 @@ package com.liang.service.edu.service;
 
 import com.liang.service.edu.entity.EduChapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liang.service.edu.entity.vo.ChapterVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduChapterService extends IService<EduChapter> {
 
+    List<ChapterVo> getChapterVideo(String courseId);
 }
