@@ -38,7 +38,7 @@ public class EduTeacherController {
     }
 
     @ApiOperation("查询所有讲师")
-    @GetMapping("/findAll")
+    @GetMapping("/list")
     public Result<List<EduTeacher>> fidAllTeacher(){
         List<EduTeacher> teachers = teacherService.list(null);
         return Result.success(teachers);

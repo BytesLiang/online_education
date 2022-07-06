@@ -1,7 +1,11 @@
 package com.liang.service.edu.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.liang.common.utils.Result;
+import com.liang.service.edu.entity.vo.CourseInfo;
+import com.liang.service.edu.service.EduCourseService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -11,8 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @author liang
  * @since 2022-07-02
  */
+@Api("课程信息")
 @RestController
-@RequestMapping("/edu/edu-course")
+@RequestMapping("/eduService/course")
+@CrossOrigin
 public class EduCourseController {
 
+    private final EduCourseService courseService;
+
+    public EduCourseController(EduCourseService eduCourseService) {
+        this.courseService = eduCourseService;
+    }
+
+    @ApiOperation("添加课程信息")
+    @PostMapping("/add")
+    public Result<String> addCourseInfo(@RequestBody CourseInfo courseInfo){
+        String id = courseService.saveCourseInfo(courseInfo);
+        return Result.success(id);
+    }
 }

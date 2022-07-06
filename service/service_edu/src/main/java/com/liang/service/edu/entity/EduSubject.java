@@ -26,8 +26,6 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "EduSubject对象", description = "课程科目")
 public class EduSubject extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty("类别名称")
     @TableField("title")
     private String title;

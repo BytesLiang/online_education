@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Data
 public class TeacherQuery implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @ApiModelProperty("讲师姓名")
     private String name;
 

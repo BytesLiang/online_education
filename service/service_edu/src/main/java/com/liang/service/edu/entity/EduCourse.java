@@ -28,8 +28,6 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "EduCourse对象", description = "课程")
 public class EduCourse extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty("课程讲师ID")
     @TableField("teacher_id")
     private String teacherId;

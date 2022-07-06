@@ -26,8 +26,6 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "EduTeacher对象", description = "讲师")
 public class EduTeacher extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty("讲师姓名")
     @TableField("name")
     private String name;
