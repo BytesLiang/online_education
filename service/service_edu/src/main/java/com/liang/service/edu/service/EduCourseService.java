@@ -15,4 +15,8 @@ import com.liang.service.edu.entity.vo.CourseInfo;
 public interface EduCourseService extends IService<EduCourse> {
 
     String saveCourseInfo(CourseInfo courseInfo);
+
+    CourseInfo getCourseInfo(String courseId);
+
+    void updateCourseInfo(CourseInfo courseInfo);
 }
