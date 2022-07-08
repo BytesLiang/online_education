@@ -1,5 +1,6 @@
 package com.liang.service.edu.service.impl;
 
+import com.liang.service.base.exceptionHandler.MyException;
 import com.liang.service.edu.entity.EduCourse;
 import com.liang.service.edu.entity.EduCourseDescription;
 import com.liang.service.edu.entity.vo.CourseInfo;
@@ -43,5 +44,35 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         courseDescription.setDescription(courseInfo.getDescription());
         courseDescriptionService.save(courseDescription);
         return eduCourse.getId();
+    }
+
+    @Override
+    public CourseInfo getCourseInfo(String courseId) {
+        EduCourse eduCourse = baseMapper.selectById(courseId);
+
+        // 封装到CourseInfoVo中
+        CourseInfo courseInfo = new CourseInfo();
+        BeanUtils.copyProperties(eduCourse, courseInfo);
+
+        // 查询描述表
+        EduCourseDescription courseDescription = courseDescriptionService.getById(courseId);
+        courseInfo.setDescription(courseDescription.getDescription());
+
+        return courseInfo;
+    }
+
+    @Override
+    public void updateCourseInfo(CourseInfo courseInfo) {
+        EduCourse eduCourse = new EduCourse();
+        BeanUtils.copyProperties(courseInfo, eduCourse);
+        int update = baseMapper.updateById(eduCourse);
+        if (update == 0) {
+            throw new MyException(20001, "修改课程信息失败");
+        }
+
+        EduCourseDescription description = new EduCourseDescription();
+        description.setId(courseInfo.getId());
+        description.setDescription(courseInfo.getDescription());
+        courseDescriptionService.updateById(description);
     }
 }
