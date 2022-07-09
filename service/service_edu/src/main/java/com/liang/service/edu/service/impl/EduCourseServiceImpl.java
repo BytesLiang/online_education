@@ -4,6 +4,7 @@ import com.liang.service.base.exceptionHandler.MyException;
 import com.liang.service.edu.entity.EduCourse;
 import com.liang.service.edu.entity.EduCourseDescription;
 import com.liang.service.edu.entity.vo.CourseInfo;
+import com.liang.service.edu.entity.vo.CoursePublishVo;
 import com.liang.service.edu.mapper.EduCourseMapper;
 import com.liang.service.edu.service.EduCourseDescriptionService;
 import com.liang.service.edu.service.EduCourseService;
@@ -73,5 +74,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         description.setId(courseInfo.getId());
         description.setDescription(courseInfo.getDescription());
         courseDescriptionService.updateById(description);
+    }
+
+    @Override
+    public CoursePublishVo getPublishCourseInfo(String id) {
+        return baseMapper.getPublishCourseInfo(id);
     }
 }

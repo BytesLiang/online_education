@@ -3,6 +3,7 @@ package com.liang.service.edu.controller;
 import com.liang.common.utils.Result;
 import com.liang.service.edu.entity.EduCourse;
 import com.liang.service.edu.entity.vo.CourseInfo;
+import com.liang.service.edu.entity.vo.CoursePublishVo;
 import com.liang.service.edu.service.EduCourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +19,7 @@ import java.util.List;
  * @author liang
  * @since 2022-07-02
  */
-@Api("课程信息")
+@Api(tags = "课程信息")
 @RestController
 @RequestMapping("/eduService/course")
 @CrossOrigin
@@ -56,5 +57,12 @@ public class EduCourseController {
     public Result<Object> updateCourseInfo(@RequestBody CourseInfo courseInfo) {
         courseService.updateCourseInfo(courseInfo);
         return Result.success();
+    }
+
+    @ApiOperation("查询课程确认信息")
+    @GetMapping("/publish/{id}")
+    public Result<CoursePublishVo> getPublishCourseInfo(@PathVariable String id){
+        CoursePublishVo courseInfo = courseService.getPublishCourseInfo(id);
+        return Result.success(courseInfo);
     }
 }
