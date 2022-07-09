@@ -52,7 +52,7 @@ public class EduCourseController {
     }
 
     @ApiOperation("修改课程信息")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public Result<Object> updateCourseInfo(@RequestBody CourseInfo courseInfo) {
         courseService.updateCourseInfo(courseInfo);
         return Result.success();

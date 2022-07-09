@@ -51,7 +51,7 @@ public class EduChapterController {
     }
 
     @ApiOperation("修改课程章节")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public Result<Object> updateChapter(@RequestBody ChapterVo chapterVo){
         EduChapter eduChapter = new EduChapter();
         BeanUtils.copyProperties(chapterVo, eduChapter);

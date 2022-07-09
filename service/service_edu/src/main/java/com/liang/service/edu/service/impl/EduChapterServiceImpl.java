@@ -62,7 +62,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         QueryWrapper<EduVideo> videoQueryWrapper = new QueryWrapper<>();
         videoQueryWrapper.eq("chapter_id", chapterId);
         if(videoService.count(videoQueryWrapper) > 0){
-            throw new MyException(20001, "不能删除");
+            throw new MyException(20001, "包含有小节，不能删除");
         }
         return baseMapper.deleteById(chapterId) > 0;
     }
