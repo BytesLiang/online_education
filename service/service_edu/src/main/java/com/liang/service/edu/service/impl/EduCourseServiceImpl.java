@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-import java.util.HashMap;
 
 /**
  * <p>
@@ -29,6 +27,7 @@ import java.util.HashMap;
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
     private EduCourseDescriptionService courseDescriptionService;
 
+    @Autowired
     public void setCourseDescriptionService(EduCourseDescriptionService courseDescriptionService) {
         this.courseDescriptionService = courseDescriptionService;
     }

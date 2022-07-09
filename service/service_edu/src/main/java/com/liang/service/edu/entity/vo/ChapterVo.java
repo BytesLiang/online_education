@@ -15,5 +15,9 @@ public class ChapterVo {
     @ApiModelProperty("章节名称")
     private String title;
 
+
+    @ApiModelProperty("显示排序")
+    private Integer sort;
+
     private List<VideoVo> children = new ArrayList<>();
 }

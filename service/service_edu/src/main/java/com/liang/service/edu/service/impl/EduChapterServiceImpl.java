@@ -1,8 +1,8 @@
 package com.liang.service.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.liang.service.base.exceptionHandler.MyException;
 import com.liang.service.edu.entity.EduChapter;
-import com.liang.service.edu.entity.EduSubject;
 import com.liang.service.edu.entity.EduVideo;
 import com.liang.service.edu.entity.vo.ChapterVo;
 import com.liang.service.edu.entity.vo.VideoVo;
@@ -55,6 +55,16 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
                 })
                 .peek(chapterVo -> chapterVo.setChildren(getVideoVoList(eduVideoList, chapterVo.getId())))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean deleteChapter(String chapterId) {
+        QueryWrapper<EduVideo> videoQueryWrapper = new QueryWrapper<>();
+        videoQueryWrapper.eq("chapter_id", chapterId);
+        if(videoService.count(videoQueryWrapper) > 0){
+            throw new MyException(20001, "不能删除");
+        }
+        return baseMapper.deleteById(chapterId) > 0;
     }
 
     private List<VideoVo> getVideoVoList(List<EduVideo> videoList, String chapterId) {
