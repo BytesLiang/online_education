@@ -68,9 +68,9 @@ public class EduCourse extends BaseEntity {
     @TableField("version")
     private Long version;
 
-    @ApiModelProperty("课程状态 Draft未发布  Normal已发布")
+    @ApiModelProperty("课程状态 0未发布  1已发布")
     @TableField("status")
-    private String status;
+    private Boolean status;
 
 
 }

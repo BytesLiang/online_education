@@ -67,6 +67,16 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         return baseMapper.deleteById(chapterId) > 0;
     }
 
+    @Override
+    public void removeByCourseId(String courseId) {
+        QueryWrapper<EduChapter> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id", courseId);
+        int delete = baseMapper.delete(wrapper);
+        if(delete == 0){
+            throw new MyException(20001, "删除章节失败");
+        }
+    }
+
     private List<VideoVo> getVideoVoList(List<EduVideo> videoList, String chapterId) {
         return videoList.stream().filter(video -> video.getChapterId().equals(chapterId))
                 .sorted(Comparator.comparingInt(EduVideo::getSort))

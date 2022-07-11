@@ -4,6 +4,9 @@ import com.liang.service.edu.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.liang.service.edu.entity.vo.CourseInfo;
 import com.liang.service.edu.entity.vo.CoursePublishVo;
+import com.liang.service.edu.entity.vo.CourseQuery;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -22,4 +25,8 @@ public interface EduCourseService extends IService<EduCourse> {
     void updateCourseInfo(CourseInfo courseInfo);
 
     CoursePublishVo getPublishCourseInfo(String id);
+
+    Map<String, Object> queryByCondition(long current, long limit, CourseQuery courseQuery);
+
+    void removeCourse(String id);
 }
