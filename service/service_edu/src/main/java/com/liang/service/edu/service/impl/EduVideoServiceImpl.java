@@ -28,4 +28,9 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
             throw new MyException(20001, "删除小节失败");
         }
     }
+
+    @Override
+    public void removeVideo(String id) {
+
+    }
 }

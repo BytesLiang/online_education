@@ -10,6 +10,7 @@
         <module>service</module>
         <module>common</module>
         <module>service/service_cos</module>
+        <module>service/service_vod</module>
     </modules>
     <name>online_education</name>
     <description>online_education</description>
@@ -22,6 +23,7 @@
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <swagger.version>3.0.0</swagger.version>
         <qcloud.cos_api.version>5.6.89</qcloud.cos_api.version>
+        <qcloud.vod_api.version>2.1.4</qcloud.vod_api.version>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +62,11 @@
                 <groupId>com.qcloud</groupId>
                 <artifactId>cos_api</artifactId>
                 <version>${qcloud.cos_api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>vod_api</artifactId>
+                <version>${qcloud.vod_api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

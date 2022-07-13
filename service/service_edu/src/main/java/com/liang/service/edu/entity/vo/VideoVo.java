@@ -11,4 +11,16 @@ public class VideoVo {
 
     @ApiModelProperty("节点名称")
     private String title;
+
+    @ApiModelProperty("显示排序")
+    private Integer sort;
+
+    @ApiModelProperty("云端视频资源")
+    private String videoSourceId;
+
+    @ApiModelProperty("原始文件名称")
+    private String videoOriginalName;
+
+    @ApiModelProperty("是否可以试听：0收费 1免费")
+    private Boolean free;
 }

@@ -52,6 +52,8 @@ public class EduVideoController {
     @ApiOperation("删除小节")
     @DeleteMapping("/{id}")
     public Result<Object> deleteVideo(@PathVariable String id){
-        return videoService.removeById(id) ? Result.success() : Result.error();
+        videoService.removeVideo(id);
+        return Result.success();
     }
+
 }

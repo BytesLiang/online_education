@@ -25,8 +25,6 @@ public class COSClientUtils implements InitializingBean {
     public static String REGION;
     public static String BUCKET_NAME;
 
-
-
     @Override
     public void afterPropertiesSet() {
         SECRET_ID = secretId;
