@@ -4,6 +4,8 @@ import com.liang.service.base.exceptionHandler.MyException;
 import com.liang.service.vod.utils.VODClientUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VodService {
     public String sign() {
@@ -18,4 +20,9 @@ public class VodService {
     }
 
 
+    public void removeBatch(List<String> videoList) {
+        for(String video : videoList){
+            VODClientUtils.deleteMedia(video);
+        }
+    }
 }

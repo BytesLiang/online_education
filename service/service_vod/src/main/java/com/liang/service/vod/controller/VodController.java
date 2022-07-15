@@ -6,6 +6,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(tags = "视频点播")
 @RestController
 @RequestMapping("/edu/vod")
@@ -28,6 +30,13 @@ public class VodController {
     @DeleteMapping("/{fileId}")
     public Result<Object> remove(@PathVariable String fileId){
         vodService.removeVideo(fileId);
+        return Result.success();
+    }
+
+    @ApiOperation("批量删除视频")
+    @DeleteMapping("delete")
+    public Result<Object> removeBatch(@RequestParam("videoList") List<String> videoList){
+        vodService.removeBatch(videoList);
         return Result.success();
     }
 }
