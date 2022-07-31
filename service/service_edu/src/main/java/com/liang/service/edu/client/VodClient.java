@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Component
-@FeignClient("server-vod")
+@FeignClient(name = "server-vod", fallback = VodDegradeFeignClient.class)
 public interface VodClient {
     @DeleteMapping("/edu/vod/{fileId}")
     Result<Object> remove(@PathVariable("fileId") String fileId);

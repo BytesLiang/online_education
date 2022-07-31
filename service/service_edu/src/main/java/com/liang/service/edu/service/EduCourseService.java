@@ -1,11 +1,13 @@
 package com.liang.service.edu.service;
 
+import com.liang.common.utils.Result;
 import com.liang.service.edu.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.liang.service.edu.entity.vo.CourseInfo;
 import com.liang.service.edu.entity.vo.CoursePublishVo;
 import com.liang.service.edu.entity.vo.CourseQuery;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,4 +31,6 @@ public interface EduCourseService extends IService<EduCourse> {
     Map<String, Object> queryByCondition(long current, long limit, CourseQuery courseQuery);
 
     void removeCourse(String id);
+
+    List<EduCourse> selectCourse(String count);
 }

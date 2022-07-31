@@ -9,8 +9,6 @@
     <modules>
         <module>service</module>
         <module>common</module>
-        <module>service/service_cos</module>
-        <module>service/service_vod</module>
     </modules>
     <name>online_education</name>
     <description>online_education</description>

@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liang.service.base.exceptionHandler.MyException;
 import com.liang.service.edu.entity.EduCourse;
 import com.liang.service.edu.entity.EduCourseDescription;
-import com.liang.service.edu.entity.EduVideo;
 import com.liang.service.edu.entity.vo.CourseInfo;
 import com.liang.service.edu.entity.vo.CoursePublishVo;
 import com.liang.service.edu.entity.vo.CourseQuery;
@@ -22,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -146,5 +146,13 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         if(delete == 0){
             throw new MyException(20001, "删除课程失败");
         }
+    }
+
+    @Override
+    public List<EduCourse> selectCourse(String count) {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("view_count");
+        wrapper.last("limit " + count);
+        return baseMapper.selectList(wrapper);
     }
 }

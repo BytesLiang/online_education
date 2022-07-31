@@ -1,6 +1,7 @@
 package com.liang.service.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.liang.common.utils.Result;
 import com.liang.service.base.exceptionHandler.MyException;
 import com.liang.service.edu.client.VodClient;
 import com.liang.service.edu.entity.EduVideo;
@@ -38,10 +39,12 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
         wrapper.eq("course_id", courseId);
         wrapper.select("video_source_id");
         List<String> videoList = baseMapper.selectList(wrapper).stream()
-                .filter(video -> !StringUtils.isEmpty(video))
                 .map(EduVideo::getVideoSourceId)
+                .filter(video -> !StringUtils.isEmpty(video))
                 .collect(Collectors.toList());
-        vodClient.removeBatch(videoList);
+        Result<Object> result = vodClient.removeBatch(videoList);
+        if(result.getCode() == 20001)
+            throw new MyException(20001, "删除小节失败");
         int delete = baseMapper.delete(wrapper);
         if(delete == 0){
             throw new MyException(20001, "删除小节失败");
@@ -51,8 +54,12 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
     @Override
     public void removeVideo(String id) {
         String videoSourceId = baseMapper.selectById(id).getVideoSourceId();
-        if(!StringUtils.isEmpty(videoSourceId))
-            vodClient.remove(videoSourceId);
+        if(!StringUtils.isEmpty(videoSourceId)) {
+            Result<Object> result = vodClient.remove(videoSourceId);
+            if(result.getCode() == 20001){
+                throw new MyException(20001, "删除视频失败");
+            }
+        }
         int delete = baseMapper.deleteById(id);
         if(delete == 0){
             throw new MyException(20001, "删除小节失败");
