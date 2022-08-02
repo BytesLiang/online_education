@@ -16,6 +16,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.liang.service.edu.service.EduVideoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -83,6 +85,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         return courseInfo;
     }
 
+    @CacheEvict(value = "course", allEntries = true)
     @Override
     public void updateCourseInfo(CourseInfo courseInfo) {
         EduCourse eduCourse = new EduCourse();
@@ -137,6 +140,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         return map;
     }
 
+    @CacheEvict(value = "course", allEntries = true)
     @Override
     public void removeCourse(String id) {
         videoService.removeByCourseId(id);
@@ -148,6 +152,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         }
     }
 
+    @Cacheable(value = "course", key = "'selectIndexList'")
     @Override
     public List<EduCourse> selectCourse(String count) {
         QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();

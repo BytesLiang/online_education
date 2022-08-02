@@ -5,6 +5,7 @@ import com.liang.service.edu.entity.EduTeacher;
 import com.liang.service.edu.mapper.EduTeacherMapper;
 import com.liang.service.edu.service.EduTeacherService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 @Service
 public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeacher> implements EduTeacherService {
 
+    @Cacheable(value = "teacher", key = "'selectIndexList'")
     @Override
     public List<EduTeacher> selectTeacher(String count) {
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
